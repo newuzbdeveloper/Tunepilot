@@ -8,6 +8,7 @@ import { ReactComponent as SearchIcon } from "Assets/Icons/search.svg";
 import { ReactComponent as SkipIcon } from "Assets/Icons/skip.svg";
 import { ReactComponent as VolumeIcon } from "Assets/Icons/volume.svg";
 import { ReactComponent as UserIcon } from "Assets/Icons/users.svg";
+import { ReactComponent as LogoIcon } from "Assets/Icons/logo.svg";
 
 const ArrowLeft = styled(ArrowIcon)`
   fill: ${(props) => props.color || "white"};
@@ -68,4 +69,5 @@ export {
   SkipRight,
   Volume,
   Users,
+  LogoIcon,
 };
