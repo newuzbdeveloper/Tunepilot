@@ -4,12 +4,12 @@ export const StyledButton = styled.button`
   background-color: none;
   border: none;
   width: ${(props) => props.width || 20}px;
-  height: ${(props) => props.heigth || 20}px;
+  height: ${(props) => props.height || 20}px;
   cursor: pointer;
-  transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out, background-color 0.1s ease-in-out;
 
   ${(props) =>
-    props.withBackground &&
+    props.withbackground &&
     css`
       border-radius: 50%;
       background-color: ${(props) =>

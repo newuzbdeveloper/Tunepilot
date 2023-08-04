@@ -1,13 +1,11 @@
-import { styled } from "styled-components";
-
-export const ContentWrapper = styled.main`
-  padding: 0 120px;
-`;
+import { Hero, Genres } from "Components/HomePage";
+import { ContentWrapper } from "./styled";
 
 function HomePage() {
   return (
     <ContentWrapper>
-      <div>hello</div>
+      <Hero />
+      <Genres />
     </ContentWrapper>
   );
 }
