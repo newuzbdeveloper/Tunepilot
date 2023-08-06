@@ -1,9 +1,10 @@
+import { Text } from "Components/UI/Typography";
 import { styled } from "styled-components";
 
 export const Wrapper = styled.section`
   margin: 24px 0 35px 0;
   background-color: ${({ theme }) => theme.colors.purple};
-  width: 100%;
+  max-width: 100%;
   height: 382px;
   display: flex;
   justify-content: space-between;
@@ -12,6 +13,9 @@ export const Wrapper = styled.section`
   margin: 22px 0 35px;
 `;
 
+export const HeroText = styled(Text)`
+  max-width: 274px;
+`;
 export const TextWrapper = styled.div`
   padding-left: 123px;
 `;

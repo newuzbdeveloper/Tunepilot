@@ -9,7 +9,7 @@ export function Header() {
         <LogoIcon />
         <SectionSubTitle>Tunepilot</SectionSubTitle>
       </LogoWrapper>
-      <IconButton withbackground={true} width={58} height={58}>
+      <IconButton withbackground width={58} height={58}>
         <Search />
       </IconButton>
     </Wrapper>

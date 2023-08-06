@@ -1,5 +1,5 @@
-import { ButtonText, MainTitle, Text } from "Components/UI/Typography";
-import { PlayButton, TextWrapper, Wrapper } from "./styled";
+import { ButtonText, MainTitle } from "Components/UI/Typography";
+import { HeroText, PlayButton, TextWrapper, Wrapper } from "./styled";
 import RadioDesktopImage from "Assets/Images/RadioDesktopImage.svg";
 import { Play } from "Components/UI/Icon";
 
@@ -8,10 +8,10 @@ function Hero() {
     <Wrapper>
       <TextWrapper>
         <MainTitle>Radio</MainTitle>
-        <Text>
-          Pick your todays mood.
-          <br /> We will play a perfect mix!
-        </Text>
+        <HeroText>
+          Pick your todays mood. <br />
+          We will play a perfect mix!
+        </HeroText>
         <PlayButton>
           <Play />
           <ButtonText>Play</ButtonText>

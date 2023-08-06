@@ -12,11 +12,11 @@ import { ReactComponent as LogoIcon } from "Assets/Icons/logo.svg";
 
 const ArrowLeft = styled(ArrowIcon)`
   fill: ${(props) => props.color || "white"};
+  transform: rotate(180deg);
 `;
 
 const ArrowRight = styled(ArrowIcon)`
   fill: ${(props) => props.color || "white"};
-  transform: rotate(180deg);
 `;
 
 const Like = styled(LikeIcon)`
@@ -41,11 +41,11 @@ const Search = styled(SearchIcon)`
   fill: ${(props) => props.color || "white"};
 `;
 
-const SkipLeft = styled(SkipIcon)`
+const SkipRight = styled(SkipIcon)`
   fill: ${(props) => props.color || "white"};
 `;
 
-const SkipRight = styled(SkipIcon)`
+const SkipLeft = styled(SkipIcon)`
   transform: rotate(180deg);
 `;
 

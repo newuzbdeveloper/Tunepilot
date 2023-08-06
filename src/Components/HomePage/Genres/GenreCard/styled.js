@@ -16,10 +16,12 @@ export const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    opacity: 0.4;
     content: "";
-    background-image: url(${(props) => props.backgroundImage});
+    background-image: ${(props) => `url(${props.backgroundImage})`};
     background-position: center center;
     background-size: cover;
     border-radius: 25px;
+    z-index: -1;
   }
 `;
