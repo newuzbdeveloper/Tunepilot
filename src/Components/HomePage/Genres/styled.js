@@ -6,6 +6,7 @@ export const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   margin-bottom: 35px;
+  overflow: hidden;
 `;
 
 export const TitleRow = styled.div`
@@ -25,15 +26,13 @@ export const ButtonWrapper = styled.div`
 export const GenreWrapper = styled.div`
   display: flex;
   align-items: center;
-  max-width: 100%;
-  max-height: 116px;
-  overflow: hidden;
+  width: 100%;
+  min-height: 116px;
   gap: 10px;
 `;
 
 export const GenreSkeletonWrapper = styled.div`
   display: flex;
-  z-index: 1;
 `;
 
 export const Button = styled(IconButton)`

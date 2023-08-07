@@ -22,6 +22,5 @@ export const Wrapper = styled.div`
     background-position: center center;
     background-size: cover;
     border-radius: 25px;
-    z-index: -1;
   }
 `;
