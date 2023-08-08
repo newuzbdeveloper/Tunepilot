@@ -36,12 +36,17 @@ function Genres() {
 
   useEffect(() => {
     const loadData = async () => {
-      const data = await axios.get("/genre");
-      setIsLoading(true);
-      setGenres(
-        data.data.data.filter((genre) => genre.name.toLowerCase() !== "all"),
-      );
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const data = await axios.get("/genre");
+        setGenres(
+          data.data.data.filter((genre) => genre.name.toLowerCase() !== "all"),
+        );
+      } catch {
+        ///
+      } finally {
+        setIsLoading(false);
+      }
     };
     loadData();
   }, []);
@@ -61,7 +66,7 @@ function Genres() {
       </TitleRow>
       <GenreWrapper>
         {isLoading &&
-          [1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+          [...Array(8).keys()].map((num) => (
             <Skeleton
               wrapper={GenreSkeletonWrapper}
               key={num}

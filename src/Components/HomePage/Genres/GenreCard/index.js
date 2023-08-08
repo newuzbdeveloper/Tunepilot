@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
-import { Wrapper } from "./styled";
+import { GenreName, Wrapper } from "./styled";
 
 function GenreCard({ backgroundImage, name }) {
-  return <Wrapper backgroundImage={backgroundImage}>{name}</Wrapper>;
+  return (
+    <Wrapper backgroundImage={backgroundImage}>
+      <GenreName>{name}</GenreName>
+    </Wrapper>
+  );
 }
 
 GenreCard.propTypes = {

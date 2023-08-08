@@ -6,6 +6,9 @@ import Home from "Pages/Home";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -16,6 +19,18 @@ function App() {
         <GlobalStyle />
         <Header />
         <Home />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
       </SkeletonTheme>
     </ThemeProvider>
   );
