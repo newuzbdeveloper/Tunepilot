@@ -10,9 +10,10 @@ import { SectionTitle } from "Components/UI/Typography";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Artists from "Components/HomePage/Artists";
 import { toast } from "react-toastify";
+import { loadCharts } from "Components/HomePage/Services/api";
+import TracksTable from "Components/TracksTable";
 
 function Home() {
   const [chart, setChart] = useState();
@@ -22,10 +23,10 @@ function Home() {
     const loadData = async () => {
       try {
         setIsLoading(true);
-        const data = await axios.get("/chart");
-        setChart(data.data);
-      } catch {
-        toast.error("Error");
+        const data = await loadCharts();
+        setChart(data);
+      } catch (err) {
+        toast.error(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -41,6 +42,7 @@ function Home() {
         <div>
           <GreyTitle>Global</GreyTitle>
           <SectionTitle>Trending right now.</SectionTitle>
+          <TracksTable tracks={chart?.tracks.data} />
         </div>
         <StyledAside>
           <GreyTitle>Global</GreyTitle>

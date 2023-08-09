@@ -1,5 +1,11 @@
 import { ButtonText, MainTitle } from "Components/UI/Typography";
-import { HeroText, PlayButton, TextWrapper, Wrapper } from "./styled";
+import {
+  HeroText,
+  ImageWrapper,
+  PlayButton,
+  TextWrapper,
+  Wrapper,
+} from "./styled";
 import RadioDesktopImage from "Assets/Images/RadioDesktopImage.svg";
 import { Play } from "Components/UI/Icon";
 
@@ -17,7 +23,9 @@ function Hero() {
           <ButtonText>Play</ButtonText>
         </PlayButton>
       </TextWrapper>
-      <img src={RadioDesktopImage} alt="Image of a radio and hands." />
+      <ImageWrapper>
+        <img src={RadioDesktopImage} alt="Image of a radio and hands." />
+      </ImageWrapper>
     </Wrapper>
   );
 }

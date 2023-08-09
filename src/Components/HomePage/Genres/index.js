@@ -15,8 +15,9 @@ import {
   TitleRow,
   Wrapper,
 } from "./styled";
-import axios from "axios";
 import GenreCard from "./GenreCard";
+import { loadGenres } from "../Services/api";
+import { toast } from "react-toastify";
 
 function Genres() {
   const [genres, setGenres] = useState();
@@ -38,12 +39,10 @@ function Genres() {
     const loadData = async () => {
       try {
         setIsLoading(true);
-        const data = await axios.get("/genre");
-        setGenres(
-          data.data.data.filter((genre) => genre.name.toLowerCase() !== "all"),
-        );
-      } catch {
-        ///
+        const data = await loadGenres();
+        setGenres(data);
+      } catch (err) {
+        toast.error(err.message);
       } finally {
         setIsLoading(false);
       }

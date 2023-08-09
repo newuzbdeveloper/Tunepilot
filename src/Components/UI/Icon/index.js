@@ -11,16 +11,16 @@ import { ReactComponent as UserIcon } from "Assets/Icons/users.svg";
 import { ReactComponent as LogoIcon } from "Assets/Icons/logo.svg";
 
 const ArrowLeft = styled(ArrowIcon)`
-  fill: ${(props) => props.color || "white"};
+  stroke: ${(props) => props.color || "white"};
   transform: rotate(180deg);
 `;
 
 const ArrowRight = styled(ArrowIcon)`
-  fill: ${(props) => props.color || "white"};
+  stroke: ${(props) => props.color || "white"};
 `;
 
 const Like = styled(LikeIcon)`
-  fill: ${(props) => props.color || "white"};
+  stroke: ${(props) => props.color || "white"};
 `;
 
 const Music = styled(MusicIcon)`

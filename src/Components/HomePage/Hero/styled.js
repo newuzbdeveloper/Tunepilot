@@ -42,3 +42,7 @@ export const PlayButton = styled.button`
     opacity: 0.8;
   }
 `;
+
+export const ImageWrapper = styled.div`
+  max-height: 382px;
+`;

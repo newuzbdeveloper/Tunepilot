@@ -1,7 +1,10 @@
 import { styled, css } from "styled-components";
 
 export const StyledButton = styled.button`
-  background-color: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
   border: none;
   width: ${(props) => props.width || 20}px;
   height: ${(props) => props.height || 20}px;
@@ -9,7 +12,7 @@ export const StyledButton = styled.button`
   transition: opacity 0.1s ease-in-out, background-color 0.1s ease-in-out;
 
   ${(props) =>
-    props.withbackground &&
+    props.withBackground &&
     css`
       border-radius: 50%;
       background-color: ${(props) =>
