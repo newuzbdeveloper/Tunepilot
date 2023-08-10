@@ -1,10 +1,5 @@
 import { Hero, Genres } from "Components/HomePage";
-import {
-  AtristsAndSongsWrapper,
-  ContentWrapper,
-  GreyTitle,
-  StyledAside,
-} from "./styled";
+import { AtristsAndSongsWrapper, GreyTitle, StyledAside } from "./styled";
 import { SectionTitle } from "Components/UI/Typography";
 
 import "swiper/css";
@@ -14,6 +9,7 @@ import Artists from "Components/HomePage/Artists";
 import { toast } from "react-toastify";
 import { loadCharts } from "Components/HomePage/Services/api";
 import TracksTable from "Components/TracksTable";
+import { ContentWrapper } from "Components/Layout";
 
 function Home() {
   const [chart, setChart] = useState();
@@ -41,8 +37,8 @@ function Home() {
       <AtristsAndSongsWrapper>
         <div>
           <GreyTitle>Global</GreyTitle>
-          <SectionTitle>Trending right now.</SectionTitle>
-          <TracksTable tracks={chart?.tracks.data} />
+          <SectionTitle>Trending right now</SectionTitle>
+          <TracksTable tracks={chart?.tracks?.data} isLoading={isLoading} />
         </div>
         <StyledAside>
           <GreyTitle>Global</GreyTitle>
