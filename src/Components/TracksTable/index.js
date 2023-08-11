@@ -2,6 +2,7 @@ import { SubText } from "Components/UI/Typography";
 import TrackRow from "./TrackRow";
 import { Line, Table, TableHead, TableHeading } from "./styled";
 import PropTypes from "prop-types";
+import Skeleton from "react-loading-skeleton";
 
 function TracksTable({ tracks, isLoading }) {
   return (
@@ -9,19 +10,21 @@ function TracksTable({ tracks, isLoading }) {
       <TableHead>
         <tr>
           <TableHeading forPaddingLeft>
-            <SubText>#</SubText>
+            <SubText>
+              {isLoading ? <Skeleton width={25} height={25} /> : "#"}
+            </SubText>
           </TableHeading>
           <TableHeading>
-            <SubText>Song name</SubText>
+            <SubText>{isLoading ? <Skeleton /> : "Song name"}</SubText>
           </TableHeading>
           <TableHeading>
-            <SubText>Time</SubText>
+            <SubText>{isLoading ? <Skeleton /> : "Time"}</SubText>
           </TableHeading>
           <TableHeading>
-            <SubText>Album Name</SubText>
+            <SubText>{isLoading ? <Skeleton /> : "Album Name"}</SubText>
           </TableHeading>
           <TableHeading>
-            <SubText>Actions</SubText>
+            <SubText>{isLoading ? <Skeleton width={80} /> : "Actions"}</SubText>
           </TableHeading>
         </tr>
       </TableHead>

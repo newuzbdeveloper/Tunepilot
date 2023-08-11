@@ -16,38 +16,57 @@ import {
 } from "./styled";
 import { SubText } from "Components/UI/Typography";
 import { formatMinAndSec } from "Utils/time";
+import Skeleton from "react-loading-skeleton";
 
 function TrackRow({ track, index }) {
   return (
     <StyledTrackRow key={track?.id}>
       <TableData>
         <TrackNumber className="trackNumber">
-          {String(index + 1).padStart(2, "0")}
+          {track ? String(index + 1).padStart(2, "0") : <Skeleton width={30} />}
         </TrackNumber>
         <PLayIcon className="playIcon">
           <Play />
         </PLayIcon>
       </TableData>
       <TrackInfo>
-        <TrackInfoImage
-          src={track?.album.cover}
-          alt={`${track?.album.title}'s cover photo`}
-        />
+        {track ? (
+          <TrackInfoImage
+            src={track?.album.cover}
+            alt={`${track?.album.title}'s cover photo`}
+          />
+        ) : (
+          <Skeleton width={65} height={65} borderRadius={25} />
+        )}
         <TrackInfoTextWrapper>
-          <TrackTitle>{track?.title}</TrackTitle>
-          <TrackSubText>{track?.artist.name}</TrackSubText>
+          <TrackTitle>
+            {track ? track?.title : <Skeleton width={300} />}
+          </TrackTitle>
+          <TrackSubText>
+            {track ? track?.artist.name : <Skeleton width={260} />}
+          </TrackSubText>
         </TrackInfoTextWrapper>
       </TrackInfo>
       <TrackDuration>
-        <SubText>{formatMinAndSec(track?.duration)}</SubText>
+        <SubText>
+          {track ? formatMinAndSec(track?.duration) : <Skeleton width={48} />}
+        </SubText>
       </TrackDuration>
       <TableData>
-        <AlbumTitle>{track?.album.title}</AlbumTitle>
+        <AlbumTitle>
+          {track ? track?.album.title : <Skeleton width={300} />}
+        </AlbumTitle>
       </TableData>
       <TableData>
-        <StyledIconButton>
-          <Like />
-        </StyledIconButton>
+        {track ? (
+          <StyledIconButton>
+            <Like />
+          </StyledIconButton>
+        ) : (
+          <StyledIconButton width={25} height={25}>
+            <Skeleton width={25} height={25} />
+          </StyledIconButton>
+        )}
       </TableData>
     </StyledTrackRow>
   );

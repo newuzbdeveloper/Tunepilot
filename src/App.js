@@ -1,12 +1,19 @@
+import { ToastContainer } from "react-toastify";
+import { SkeletonTheme } from "react-loading-skeleton";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./Styles/Theme";
 import { GlobalStyle } from "./Styles/Golbal";
 import Header from "Components/Header";
 import Home from "Pages/Home";
-import { SkeletonTheme } from "react-loading-skeleton";
+import Player from "Components/Player";
+
+//Import skeleton css
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { ToastContainer } from "react-toastify";
+//Import rc slider css
+import "rc-slider/assets/index.css";
+
+//Import toastify css
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -19,6 +26,7 @@ function App() {
         <GlobalStyle />
         <Header />
         <Home />
+        <Player />
         <ToastContainer
           position="bottom-right"
           autoClose={5000}

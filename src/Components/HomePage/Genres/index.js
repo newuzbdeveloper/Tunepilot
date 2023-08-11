@@ -55,10 +55,10 @@ function Genres() {
       <TitleRow>
         <SectionSubTitle>Genres</SectionSubTitle>
         <ButtonWrapper>
-          <Button withbackground width={24} height={24} onClick={handlePrev}>
+          <Button withbackground width={30} height={30} onClick={handlePrev}>
             <ArrowLeft />
           </Button>
-          <Button withbackground width={24} height={24} onClick={handleNext}>
+          <Button withbackground width={30} height={30} onClick={handleNext}>
             <ArrowRight />
           </Button>
         </ButtonWrapper>
