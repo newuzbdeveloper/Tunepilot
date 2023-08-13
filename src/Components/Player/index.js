@@ -12,9 +12,11 @@ import {
   Wrapper,
 } from "./styled";
 import IconButton from "Components/UI/IconButton";
-import { Pause, SkipLeft, SkipRight, Volume } from "Components/UI/Icon";
+import { Pause, Play, SkipLeft, SkipRight, Volume } from "Components/UI/Icon";
 import { SubText, Text } from "Components/UI/Typography";
 import { theme } from "Styles/Theme";
+import { useEffect, useRef, useState } from "react";
+import { formatMinAndSec } from "Utils/time";
 
 const track = {
   id: 65723649,
@@ -68,9 +70,40 @@ const track = {
 };
 
 function Player() {
+  const audioRef = useRef();
+  const [playerState, setPlayerState] = useState({
+    isPlaying: false,
+    currentTime: 0,
+    duration: 0,
+  });
+
+  const togglePlay = () => {
+    setPlayerState((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
+  };
+
+  const onTimeUpdate = () => {
+    const currentTime = audioRef.current.currentTime;
+    const duration = audioRef.current.duration;
+    setPlayerState((prev) => ({ ...prev, currentTime, duration }));
+  };
+
+  useEffect(() => {
+    if (!audioRef?.current) return;
+    if (playerState.isPlaying) {
+      audioRef.current.play();
+    } else audioRef.current.pause();
+  }, [audioRef, track, playerState.isPlaying]);
+
   return (
     <Wrapper>
-      <ContentWrapper display="flex">
+      <ContentWrapper display="flex" items="center">
+        <audio
+          ref={audioRef}
+          src={track.preview}
+          controls
+          onLoadedMetadata={onTimeUpdate}
+          onTimeUpdate={onTimeUpdate}
+        />
         <TrackInfoWrapper>
           <TrackImage
             src={track.album.cover}
@@ -85,15 +118,20 @@ function Player() {
           <IconButton width={35} height={35}>
             <SkipLeft />
           </IconButton>
-          <IconButton withbackground width={55} height={55}>
-            <Pause />
+          <IconButton
+            onClick={togglePlay}
+            withbackground
+            width={55}
+            height={55}
+          >
+            {playerState.isPlaying ? <Pause /> : <Play />}
           </IconButton>
           <IconButton width={35} height={35}>
             <SkipRight />
           </IconButton>
         </ControlButtonsWrapper>
         <TrackTimeWrapper>
-          <SubText>01.23</SubText>
+          <SubText>{formatMinAndSec(playerState.currentTime)}</SubText>
           <Slider
             style={{ padding: "3px 0" }}
             trackStyle={{ height: 8, backgroundColor: theme.colors.white }}
@@ -104,7 +142,7 @@ function Player() {
               marginTop: -3,
             }}
           />
-          <EndOfSong>02.30</EndOfSong>
+          <EndOfSong>{formatMinAndSec(playerState.duration)}</EndOfSong>
         </TrackTimeWrapper>
         <VolumeControl>
           <IconButton width={24} height={24}>
