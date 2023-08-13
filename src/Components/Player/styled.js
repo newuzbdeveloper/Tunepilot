@@ -52,8 +52,11 @@ export const TrackTimeWrapper = styled.div`
   width: 100%;
 `;
 
-export const EndOfSong = styled(SubText)`
-  color: ${({ theme }) => theme.colors.secondaryGray};
+export const TrackTime = styled(SubText)`
+  color: ${(props) =>
+    props.grey ? props.theme.colors.secondaryGrey : "inherit"};
+  width: 80px;
+  margin: 0 auto;
 `;
 
 export const VolumeControl = styled.div`

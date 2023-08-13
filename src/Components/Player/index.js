@@ -3,17 +3,17 @@ import { ContentWrapper } from "Components/Layout";
 import {
   ArtistName,
   ControlButtonsWrapper,
-  EndOfSong,
   TrackImage,
   TrackInfo,
   TrackInfoWrapper,
+  TrackTime,
   TrackTimeWrapper,
   VolumeControl,
   Wrapper,
 } from "./styled";
 import IconButton from "Components/UI/IconButton";
 import { Pause, Play, SkipLeft, SkipRight, Volume } from "Components/UI/Icon";
-import { SubText, Text } from "Components/UI/Typography";
+import { Text } from "Components/UI/Typography";
 import { theme } from "Styles/Theme";
 import { useEffect, useRef, useState } from "react";
 import { formatMinAndSec } from "Utils/time";
@@ -75,6 +75,7 @@ function Player() {
     isPlaying: false,
     currentTime: 0,
     duration: 0,
+    volume: 0.7,
   });
 
   const togglePlay = () => {
@@ -87,6 +88,22 @@ function Player() {
     setPlayerState((prev) => ({ ...prev, currentTime, duration }));
   };
 
+  const onTrackTimeDrag = (newTime) => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = newTime;
+    setPlayerState((prev) => ({ ...prev, currentTime: newTime }));
+  };
+
+  const onVolumeChange = (newVolume) => {
+    if (!audioRef.current) return;
+    audioRef.current.volume = newVolume;
+    setPlayerState((prev) => ({ ...prev, volume: newVolume }));
+  };
+
+  const toggleVolume = (newVolume) => {
+    newVolume = playerState.volume > 0 ? 0 : 1;
+    onVolumeChange(newVolume);
+  };
   useEffect(() => {
     if (!audioRef?.current) return;
     if (playerState.isPlaying) {
@@ -103,6 +120,7 @@ function Player() {
           controls
           onLoadedMetadata={onTimeUpdate}
           onTimeUpdate={onTimeUpdate}
+          hidden
         />
         <TrackInfoWrapper>
           <TrackImage
@@ -131,8 +149,13 @@ function Player() {
           </IconButton>
         </ControlButtonsWrapper>
         <TrackTimeWrapper>
-          <SubText>{formatMinAndSec(playerState.currentTime)}</SubText>
+          <TrackTime>{formatMinAndSec(playerState.currentTime)}</TrackTime>
           <Slider
+            min={0}
+            max={playerState.duration}
+            value={playerState.currentTime}
+            step={0.2}
+            onChange={onTrackTimeDrag}
             style={{ padding: "3px 0" }}
             trackStyle={{ height: 8, backgroundColor: theme.colors.white }}
             railStyle={{ height: 8, backgroundColor: theme.colors.darkGrey }}
@@ -142,13 +165,18 @@ function Player() {
               marginTop: -3,
             }}
           />
-          <EndOfSong>{formatMinAndSec(playerState.duration)}</EndOfSong>
+          <TrackTime>{formatMinAndSec(playerState.duration)}</TrackTime>
         </TrackTimeWrapper>
         <VolumeControl>
-          <IconButton width={24} height={24}>
+          <IconButton width={24} height={24} onClick={toggleVolume}>
             <Volume />
           </IconButton>
           <Slider
+            min={0}
+            max={1}
+            value={playerState.volume}
+            step={0.01}
+            onChange={onVolumeChange}
             style={{ padding: "3px 0" }}
             trackStyle={{ height: 8, backgroundColor: theme.colors.white }}
             railStyle={{ height: 8, backgroundColor: theme.colors.darkGrey }}
