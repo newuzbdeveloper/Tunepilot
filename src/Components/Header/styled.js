@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 
 export const Wrapper = styled.header`
-  padding: 0 120px;
   height: 118px;
   display: flex;
   background-color: ${({ theme }) => theme.colors.secondaryBlack};

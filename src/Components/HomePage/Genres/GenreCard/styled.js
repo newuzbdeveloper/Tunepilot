@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
     height: 100%;
     opacity: 0.4;
     content: "";
-    background-image: ${(props) => `url(${props.backgroundImage})`};
+    background-image: ${(props) => `url(${props.image})`};
     background-position: center center;
     background-size: cover;
     border-radius: 25px;

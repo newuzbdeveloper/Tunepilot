@@ -1,4 +1,4 @@
-import { Like, Play } from "Components/UI/Icon";
+import { Like, Pause, Play } from "Components/UI/Icon";
 import PropTypes from "prop-types";
 import {
   AlbumTitle,
@@ -18,15 +18,15 @@ import { SubText } from "Components/UI/Typography";
 import { formatMinAndSec } from "Utils/time";
 import Skeleton from "react-loading-skeleton";
 
-function TrackRow({ track, index }) {
+function TrackRow({ track, index, onClick, isPlaying }) {
   return (
-    <StyledTrackRow key={track?.id}>
+    <StyledTrackRow key={track?.id} onClick={() => onClick(track)}>
       <TableData>
         <TrackNumber className="trackNumber">
           {track ? String(index + 1).padStart(2, "0") : <Skeleton width={30} />}
         </TrackNumber>
         <PLayIcon className="playIcon">
-          <Play />
+          {isPlaying ? <Pause /> : <Play />}
         </PLayIcon>
       </TableData>
       <TrackInfo>
@@ -72,6 +72,7 @@ function TrackRow({ track, index }) {
   );
 }
 TrackRow.propTypes = {
+  onClick: PropTypes.func,
   track: PropTypes.shape({
     id: PropTypes.number,
     duration: PropTypes.number,
@@ -86,6 +87,7 @@ TrackRow.propTypes = {
     }),
   }),
   index: PropTypes.number,
+  isPlaying: PropTypes.bool,
 };
 
 export default TrackRow;
