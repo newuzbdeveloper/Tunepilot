@@ -1,10 +1,11 @@
+import { PLAYER_HEIGHT } from "Assets/Commons/constants";
 import { SectionSubTitle } from "Components/UI/Typography";
 import { styled } from "styled-components";
 
 export const AtristsAndSongsWrapper = styled.section`
   display: grid;
   grid-template-columns: 65% 35%;
-  padding-bottom: 125px;
+  padding-bottom: calc(${PLAYER_HEIGHT}px + 50px);
   overflow: hidden;
 `;
 

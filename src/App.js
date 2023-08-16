@@ -1,12 +1,13 @@
 import { useReducer } from "react";
+import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./Styles/Theme";
 import { GlobalStyle } from "./Styles/Golbal";
-import Header from "Components/Header";
+import Layout from "Components/Layout";
 import Home from "Pages/Home";
-import Player from "Components/Player";
+import Search from "Pages/Search";
 import { initialState, playerReducer } from "Components/Context/PlayerReducer";
 import {
   PlayerContext,
@@ -33,9 +34,12 @@ function App() {
             highlightColor={theme.colors.lightWhite}
           >
             <GlobalStyle />
-            <Header />
-            <Home />
-            <Player />
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="/Search" element={<Search />} />
+              </Route>
+            </Routes>
             <ToastContainer
               position="bottom-right"
               autoClose={5000}

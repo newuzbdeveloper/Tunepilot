@@ -9,7 +9,6 @@ import Artists from "Components/HomePage/Artists";
 import { toast } from "react-toastify";
 import { loadCharts } from "Components/HomePage/Services/api";
 import TracksTable from "Components/TracksTable";
-import { ContentWrapper } from "Components/Layout";
 
 function Home() {
   const [chart, setChart] = useState();
@@ -31,7 +30,7 @@ function Home() {
   }, []);
 
   return (
-    <ContentWrapper>
+    <main>
       <Hero />
       <Genres />
       <AtristsAndSongsWrapper>
@@ -46,7 +45,7 @@ function Home() {
           <Artists isLoading={isLoading} artists={chart?.artists.data} />
         </StyledAside>
       </AtristsAndSongsWrapper>
-    </ContentWrapper>
+    </main>
   );
 }
 

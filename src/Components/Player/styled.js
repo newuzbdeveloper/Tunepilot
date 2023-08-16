@@ -1,3 +1,4 @@
+import { PLAYER_HEIGHT } from "Assets/Commons/constants";
 import { SubText, Text } from "Components/UI/Typography";
 import { styled } from "styled-components";
 
@@ -10,7 +11,7 @@ export const Wrapper = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
-  height: 130px;
+  height: ${PLAYER_HEIGHT}px;
   z-index: ${({ theme }) => theme.zIndex["30"]};
 `;
 

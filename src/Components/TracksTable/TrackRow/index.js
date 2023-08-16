@@ -32,8 +32,8 @@ function TrackRow({ track, index, onClick, isPlaying }) {
       <TrackInfo>
         {track ? (
           <TrackInfoImage
-            src={track?.album.cover}
-            alt={`${track?.album.title}'s cover photo`}
+            src={track?.album?.cover}
+            alt={`${track?.album?.title}'s cover photo`}
           />
         ) : (
           <Skeleton width={65} height={65} borderRadius={25} />
@@ -43,18 +43,22 @@ function TrackRow({ track, index, onClick, isPlaying }) {
             {track ? track?.title : <Skeleton width={300} />}
           </TrackTitle>
           <TrackSubText>
-            {track ? track?.artist.name : <Skeleton width={260} />}
+            {track ? track?.artist?.name : <Skeleton width={260} />}
           </TrackSubText>
         </TrackInfoTextWrapper>
       </TrackInfo>
       <TrackDuration>
         <SubText>
-          {track ? formatMinAndSec(track?.duration) : <Skeleton width={48} />}
+          {track?.duration ? (
+            formatMinAndSec(track?.duration)
+          ) : (
+            <Skeleton width={48} />
+          )}
         </SubText>
       </TrackDuration>
       <TableData>
         <AlbumTitle>
-          {track ? track?.album.title : <Skeleton width={300} />}
+          {track ? track?.album?.title : <Skeleton width={300} />}
         </AlbumTitle>
       </TableData>
       <TableData>
