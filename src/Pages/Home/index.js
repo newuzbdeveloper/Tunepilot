@@ -7,19 +7,24 @@ import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import Artists from "Components/HomePage/Artists";
 import { toast } from "react-toastify";
-import { loadCharts } from "Components/HomePage/Services/api";
+import { loadCharts, loadRadioTracks } from "Components/HomePage/Services/api";
 import TracksTable from "Components/TracksTable";
 
 function Home() {
   const [chart, setChart] = useState();
+  const [radio, setRadio] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
       try {
         setIsLoading(true);
-        const data = await loadCharts();
-        setChart(data);
+        const [chart, radio] = await Promise.all([
+          loadCharts(),
+          loadRadioTracks(),
+        ]);
+        setChart(chart);
+        setRadio(radio);
       } catch (err) {
         toast.error(err.message);
       } finally {
@@ -31,7 +36,7 @@ function Home() {
 
   return (
     <main>
-      <Hero />
+      <Hero tracks={radio} />
       <Genres />
       <AtristsAndSongsWrapper>
         <div>

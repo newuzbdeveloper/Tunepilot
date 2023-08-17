@@ -34,7 +34,7 @@ function Search() {
           placeholder="Search..."
         />
       </InputWrapper>
-      {searchResult && tracks?.length > 0 && (
+      {searchResult && (
         <div>
           <TableTitle>Results by: {searchResult}</TableTitle>
           {(isLoading || (!isLoading && tracks?.length > 0)) && (
