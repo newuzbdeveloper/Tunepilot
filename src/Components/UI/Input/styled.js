@@ -10,7 +10,7 @@ export const StyledInput = styled.input`
   font-family: ${({ theme }) => theme.fontStyle.Inter};
   font-size: 22px;
   line-height: 27px;
-  background-image: ${(props) => `url(${props.startIcon})`};
+  background-image: ${(props) => `url(${props.icon})`};
   background-repeat: no-repeat;
   background-position: 17px 20px;
   width: 100%;
