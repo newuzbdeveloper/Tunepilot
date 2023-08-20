@@ -1,5 +1,6 @@
 import Header from "Components/Header";
 import Player from "Components/Player";
+import { device } from "Styles/BreakPoints";
 import { Outlet } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -11,6 +12,14 @@ export const ContentWrapper = styled.div`
   display: ${(props) => props.display || "block"};
   align-items: ${(props) => props.items || "flex-start"};
   justify-content: ${(props) => props.content || "start"};
+
+  ${device.md} {
+    padding: 0 15px;
+  }
+
+  ${device.xl} {
+    padding: 0 62px;
+  }
 `;
 
 function Layout() {

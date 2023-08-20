@@ -19,10 +19,13 @@ import GenreCard from "./GenreCard";
 import { loadGenres } from "../Services/api";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useWindowSize } from "Hooks/useWindowSize";
+import { breakPoints } from "Styles/BreakPoints";
 
 function Genres() {
   const [genres, setGenres] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const { width } = useWindowSize();
 
   const sliderRef = useRef(null);
 
@@ -70,15 +73,15 @@ function Genres() {
             <Skeleton
               wrapper={GenreSkeletonWrapper}
               key={num}
-              height={116}
-              width={220}
+              height={width < breakPoints.md ? 95 : 116}
+              width={width < breakPoints.md ? 137 : 220}
               borderRadius={25}
             />
           ))}
         <Swiper
           ref={sliderRef}
           slidesPerView="auto"
-          spaceBetween={20}
+          spaceBetween={width < breakPoints.md ? 9 : 20}
           modules={[Pagination]}
         >
           {!isLoading &&

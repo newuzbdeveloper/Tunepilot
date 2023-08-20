@@ -1,5 +1,6 @@
 import { PLAYER_HEIGHT } from "Assets/Commons/constants";
 import { SectionSubTitle } from "Components/UI/Typography";
+import { device } from "Styles/BreakPoints";
 import { styled } from "styled-components";
 
 export const AtristsAndSongsWrapper = styled.section`
@@ -7,6 +8,11 @@ export const AtristsAndSongsWrapper = styled.section`
   grid-template-columns: 65% 35%;
   padding-bottom: calc(${PLAYER_HEIGHT}px + 50px);
   overflow: hidden;
+
+  ${device.md} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const GreyTitle = styled(SectionSubTitle)`

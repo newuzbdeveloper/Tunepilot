@@ -1,3 +1,4 @@
+import { device } from "Styles/BreakPoints";
 import { styled } from "styled-components";
 
 export const Wrapper = styled.div`

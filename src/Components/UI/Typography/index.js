@@ -1,3 +1,4 @@
+import { device } from "Styles/BreakPoints";
 import { styled } from "styled-components";
 
 export const MainTitle = styled.h1`
@@ -7,6 +8,10 @@ export const MainTitle = styled.h1`
   line-height: 90px;
   letter-spacing: 0em;
   text-align: left;
+
+  ${device.md} {
+    text-align: center;
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -25,6 +30,11 @@ export const SectionSubTitle = styled.h3`
   line-height: 38px;
   letter-spacing: 0em;
   text-align: left;
+
+  ${device.md} {
+    font-size: 18px;
+    line-height: 30px;
+  }
 `;
 
 export const Text = styled.span`
