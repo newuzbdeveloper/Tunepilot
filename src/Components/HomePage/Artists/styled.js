@@ -7,6 +7,10 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 35px;
+
+  ${device.md} {
+    margin-top: 20px;
+  }
 `;
 
 export const ArtistsWrapper = styled.div`

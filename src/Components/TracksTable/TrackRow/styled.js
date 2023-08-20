@@ -1,5 +1,6 @@
 import IconButton from "Components/UI/IconButton";
 import { SubText, Text } from "Components/UI/Typography";
+import { device } from "Styles/BreakPoints";
 import { styled } from "styled-components";
 
 export const TableData = styled.td`
@@ -61,6 +62,11 @@ export const TrackTitle = styled(Text)`
   line-clamp: 1;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+
+  ${device.md} {
+    font-size: 18px;
+    line-height: 22px;
+  }
 `;
 
 export const TrackSubText = styled(SubText)`

@@ -9,9 +9,10 @@ export const AtristsAndSongsWrapper = styled.section`
   padding-bottom: calc(${PLAYER_HEIGHT}px + 50px);
   overflow: hidden;
 
-  ${device.md} {
+  ${device.xl} {
     display: flex;
     flex-direction: column;
+    gap: 45px;
   }
 `;
 
@@ -21,4 +22,8 @@ export const GreyTitle = styled(SectionSubTitle)`
 
 export const StyledAside = styled.aside`
   margin-left: 35px;
+
+  ${device.xl} {
+    margin-left: 0;
+  }
 `;

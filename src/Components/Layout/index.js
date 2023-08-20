@@ -16,10 +16,6 @@ export const ContentWrapper = styled.div`
   ${device.md} {
     padding: 0 15px;
   }
-
-  ${device.xl} {
-    padding: 0 62px;
-  }
 `;
 
 function Layout() {

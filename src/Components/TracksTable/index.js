@@ -9,8 +9,11 @@ import {
   PlayerDispatchContext,
 } from "Components/Context/PlayerContext";
 import { actions } from "Components/Context/Actions";
+import { useWindowSize } from "Hooks/useWindowSize";
+import { breakPoints } from "Styles/BreakPoints";
 
 function TracksTable({ tracks, isLoading }) {
+  const { width } = useWindowSize();
   const dispatch = useContext(PlayerDispatchContext);
   const { track, isPlaying, savedTrackIds } = useContext(PlayerContext);
 
@@ -47,12 +50,16 @@ function TracksTable({ tracks, isLoading }) {
           <TableHeading>
             <SubText>{isLoading ? <Skeleton /> : "Song name"}</SubText>
           </TableHeading>
-          <TableHeading>
-            <SubText>{isLoading ? <Skeleton /> : "Time"}</SubText>
-          </TableHeading>
-          <TableHeading>
-            <SubText>{isLoading ? <Skeleton /> : "Album Name"}</SubText>
-          </TableHeading>
+          {width > breakPoints.md && (
+            <TableHeading>
+              <SubText>{isLoading ? <Skeleton /> : "Time"}</SubText>
+            </TableHeading>
+          )}
+          {width > breakPoints.md && (
+            <TableHeading>
+              <SubText>{isLoading ? <Skeleton /> : "Album Name"}</SubText>
+            </TableHeading>
+          )}
           <TableHeading>
             <SubText>{isLoading ? <Skeleton width={80} /> : "Actions"}</SubText>
           </TableHeading>
@@ -72,6 +79,7 @@ function TracksTable({ tracks, isLoading }) {
               onClick={handleTrackClick}
               isSaved={savedTrackIds.includes(currentTrack.id)}
               handleSaveTrack={handleSaveTrack}
+              screenWidth={width}
             />
           ))}
         {isLoading &&

@@ -7,7 +7,7 @@ const API_RADIO_TRACKS_REQUEST = "/radio/37151/tracks";
 
 export const loadCharts = async () => {
   try {
-    const data = await axios(`${API_CHART_REQUEST}?limit=100`);
+    const data = await axios(`${API_CHART_REQUEST}?limit=10`);
     if (!data.data) throw Error();
     return data.data;
   } catch (err) {

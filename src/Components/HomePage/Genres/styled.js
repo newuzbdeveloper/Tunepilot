@@ -11,6 +11,7 @@ export const Wrapper = styled.section`
 
   ${device.md} {
     gap: 20px;
+    margin-bottom: 35px;
   }
 `;
 

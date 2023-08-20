@@ -10,7 +10,8 @@ export const MainTitle = styled.h1`
   text-align: left;
 
   ${device.md} {
-    text-align: center;
+    font-size: 30px;
+    line-height: 45px;
   }
 `;
 
@@ -21,6 +22,11 @@ export const SectionTitle = styled.h2`
   line-height: 53px;
   letter-spacing: 0em;
   text-align: left;
+
+  ${device.md} {
+    font-size: 22px;
+    line-height: 33px;
+  }
 `;
 
 export const SectionSubTitle = styled.h3`
@@ -53,6 +59,11 @@ export const SubText = styled.span`
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
+
+  ${device.md} {
+    font-size: 18px;
+    line-height: 22px;
+  }
 `;
 
 export const ButtonText = styled.span`
