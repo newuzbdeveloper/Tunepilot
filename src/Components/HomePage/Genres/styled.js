@@ -8,6 +8,7 @@ export const Wrapper = styled.section`
   align-items: center;
   gap: 35px;
   overflow: hidden;
+  margin-bottom: 35px;
 
   ${device.md} {
     gap: 20px;

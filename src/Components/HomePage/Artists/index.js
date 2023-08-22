@@ -10,8 +10,12 @@ import {
   ArtistsWrapper,
   Wrapper,
 } from "./styled";
+import { useWindowSize } from "Hooks/useWindowSize";
+import { breakPoints } from "Styles/BreakPoints";
 
 function Artists({ isLoading, artists }) {
+  const { width } = useWindowSize();
+  const isMobileLayout = width < breakPoints.md;
   return (
     <Wrapper>
       <ArtistsWrapper>
@@ -21,11 +25,11 @@ function Artists({ isLoading, artists }) {
               <Skeleton
                 wrapper={ArtistSkeletonWrapper}
                 key={num}
-                height={95}
-                width={95}
+                height={isMobileLayout ? 75 : 95}
+                width={isMobileLayout ? 75 : 95}
                 circle
               />
-              <Skeleton height={27} />
+              <Skeleton height={isMobileLayout ? 19 : 27} />
             </ArtistCardSkeletonWrapper>
           ))}
         <Swiper slidesPerView="auto" spaceBetween={20} modules={[Pagination]}>

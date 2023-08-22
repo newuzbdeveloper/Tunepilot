@@ -14,6 +14,7 @@ import { breakPoints } from "Styles/BreakPoints";
 
 function TracksTable({ tracks, isLoading }) {
   const { width } = useWindowSize();
+  const isMobileLayout = width > breakPoints.md;
   const dispatch = useContext(PlayerDispatchContext);
   const { track, isPlaying, savedTrackIds } = useContext(PlayerContext);
 
@@ -50,12 +51,12 @@ function TracksTable({ tracks, isLoading }) {
           <TableHeading>
             <SubText>{isLoading ? <Skeleton /> : "Song name"}</SubText>
           </TableHeading>
-          {width > breakPoints.md && (
+          {isMobileLayout && (
             <TableHeading>
               <SubText>{isLoading ? <Skeleton /> : "Time"}</SubText>
             </TableHeading>
           )}
-          {width > breakPoints.md && (
+          {isMobileLayout && (
             <TableHeading>
               <SubText>{isLoading ? <Skeleton /> : "Album Name"}</SubText>
             </TableHeading>
@@ -83,7 +84,9 @@ function TracksTable({ tracks, isLoading }) {
             />
           ))}
         {isLoading &&
-          [...Array(9).keys()].map((num) => <TrackRow key={num} index={num} />)}
+          [...Array(9).keys()].map((num) => (
+            <TrackRow key={num} index={num} screenWidth={width} />
+          ))}
       </tbody>
     </Table>
   );

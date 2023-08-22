@@ -12,6 +12,18 @@ export const MainTitle = styled.h1`
   ${device.md} {
     font-size: 30px;
     line-height: 45px;
+    text-align: center;
+  }
+`;
+
+export const SmallText = styled.span`
+  font-family: ${({ theme }) => theme.fontStyle.Inter}, sans-serif;
+  font-weight: ${({ theme }) => theme.fontWeight.normal};
+  font-size: 18px;
+  line-height: 22px;
+  ${device.md} {
+    font-size: 18px;
+    line-height: 22px;
   }
 `;
 

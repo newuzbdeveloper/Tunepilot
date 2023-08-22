@@ -1,5 +1,6 @@
-import { PLAYER_HEIGHT } from "Assets/Commons/constants";
+import { MOBILE_PLAYER_HEIGHT, PLAYER_HEIGHT } from "Assets/Commons/constants";
 import { SubText, Text } from "Components/UI/Typography";
+import { device } from "Styles/BreakPoints";
 import { styled } from "styled-components";
 
 export const Wrapper = styled.div`
@@ -13,6 +14,10 @@ export const Wrapper = styled.div`
   bottom: 0;
   height: ${PLAYER_HEIGHT}px;
   z-index: ${({ theme }) => theme.zIndex["30"]};
+
+  ${device.lg} {
+    height: ${MOBILE_PLAYER_HEIGHT}px;
+  }
 `;
 
 export const TrackInfoWrapper = styled.div`

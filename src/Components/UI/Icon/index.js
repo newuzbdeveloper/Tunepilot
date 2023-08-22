@@ -25,7 +25,7 @@ const Like = styled(LikeIcon)`
 `;
 
 const Music = styled(MusicIcon)`
-  fill: ${(props) => props.color || "white"};
+  stroke: ${(props) => props.color || "white"};
 `;
 
 const Pause = styled(PauseIcon)`

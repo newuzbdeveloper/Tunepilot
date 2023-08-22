@@ -10,6 +10,11 @@ export const TableData = styled.td`
 export const TrackInfo = styled(TableData)`
   display: flex;
   gap: 25px;
+
+  ${device.md} {
+    gap: 10px;
+    align-items: center;
+  }
 `;
 
 export const TrackInfoTextWrapper = styled.div`
@@ -17,12 +22,22 @@ export const TrackInfoTextWrapper = styled.div`
   gap: 10px;
   flex-direction: column;
   padding: 10px 20px 10px 0;
+
+  ${device.md} {
+    gap: 2px;
+  }
 `;
 
 export const TrackInfoImage = styled.img`
   width: 65px;
   height: 65px;
   border-radius: 15px;
+
+  ${device.md} {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+  }
 `;
 
 export const StyledTrackRow = styled.tr`

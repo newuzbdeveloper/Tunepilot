@@ -26,6 +26,7 @@ function Genres() {
   const [genres, setGenres] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { width } = useWindowSize();
+  const isMobileLayout = width < breakPoints.md;
 
   const sliderRef = useRef(null);
 
@@ -59,10 +60,20 @@ function Genres() {
       <TitleRow>
         <SectionSubTitle>Genres</SectionSubTitle>
         <ButtonWrapper>
-          <Button withbackground width={30} height={30} onClick={handlePrev}>
+          <Button
+            withbackground
+            width={isMobileLayout ? 25 : 30}
+            height={isMobileLayout ? 25 : 30}
+            onClick={handlePrev}
+          >
             <ArrowLeft />
           </Button>
-          <Button withbackground width={30} height={30} onClick={handleNext}>
+          <Button
+            withbackground
+            width={isMobileLayout ? 25 : 30}
+            height={isMobileLayout ? 25 : 30}
+            onClick={handleNext}
+          >
             <ArrowRight />
           </Button>
         </ButtonWrapper>
@@ -73,21 +84,21 @@ function Genres() {
             <Skeleton
               wrapper={GenreSkeletonWrapper}
               key={num}
-              height={width < breakPoints.md ? 95 : 116}
-              width={width < breakPoints.md ? 137 : 220}
+              height={isMobileLayout ? 95 : 116}
+              width={isMobileLayout ? 137 : 220}
               borderRadius={25}
             />
           ))}
         <Swiper
           ref={sliderRef}
           slidesPerView="auto"
-          spaceBetween={width < breakPoints.md ? 9 : 20}
+          spaceBetween={isMobileLayout ? 9 : 20}
           modules={[Pagination]}
         >
           {!isLoading &&
             genres?.map((genre) => (
               <SwiperSlide key={genre.id} style={{ width: "auto" }}>
-                <Link to="{`/genres/${genre.id}`}">
+                <Link to={`/genres/${genre.id}`}>
                   <GenreCard
                     name={genre.name}
                     backgroundImage={genre.picture_medium}

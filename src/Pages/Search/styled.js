@@ -1,5 +1,6 @@
-import { PLAYER_HEIGHT } from "Assets/Commons/constants";
+import { MOBILE_PLAYER_HEIGHT, PLAYER_HEIGHT } from "Assets/Commons/constants";
 import { SectionSubTitle } from "Components/UI/Typography";
+import { device } from "Styles/BreakPoints";
 import { styled } from "styled-components";
 
 export const Wrapper = styled.div`
@@ -7,6 +8,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding-top: 52px;
   padding-bottom: calc(${PLAYER_HEIGHT}px + 50px);
+
+  ${device.lg} {
+    padding-bottom: calc(${MOBILE_PLAYER_HEIGHT} + 50px);
+  }
 `;
 
 export const InputWrapper = styled.div`
