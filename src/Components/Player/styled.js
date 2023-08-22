@@ -26,12 +26,32 @@ export const TrackInfoWrapper = styled.div`
   gap: 25px;
   min-width: 400px;
   padding-right: 15px;
+
+  @media (max-width: 1400px) {
+    min-width: 250px;
+  }
+
+  ${device.lg} {
+    gap: 10px;
+  }
+`;
+
+export const MobileTrackRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
 
 export const TrackImage = styled.img`
   width: 65px;
   height: 65px;
   border-radius: 15px;
+
+  ${device.lg} {
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 export const TrackInfo = styled.div`
@@ -39,6 +59,10 @@ export const TrackInfo = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 10px;
+
+  ${device.lg} {
+    gap: 2px;
+  }
 `;
 
 export const ArtistName = styled(SubText)`
@@ -48,6 +72,10 @@ export const ArtistName = styled(SubText)`
   line-clamp: 1;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+
+  ${device.lg} {
+    font-size: 16px;
+  }
 `;
 
 export const TrackTitle = styled(Text)`
@@ -56,6 +84,10 @@ export const TrackTitle = styled(Text)`
   line-clamp: 1;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+
+  ${device.lg} {
+    font-size: 18px;
+  }
 `;
 
 export const ControlButtonsWrapper = styled.div`
@@ -70,6 +102,10 @@ export const TrackTimeWrapper = styled.div`
   gap: 20px;
   margin-left: 50px;
   width: 100%;
+
+  ${device.xl} {
+    margin-left: 0;
+  }
 `;
 
 export const TrackTime = styled(SubText)`
@@ -77,6 +113,11 @@ export const TrackTime = styled(SubText)`
     props.grey ? props.theme.colors.secondaryGrey : "inherit"};
   width: 80px;
   margin: 0 auto;
+
+  ${device.lg} {
+    margin: ${(props) => (props.last ? "0 0 0 20px" : 0)};
+    text-align: ${(props) => (props.last ? "right" : "inherit")};
+  }
 `;
 
 export const VolumeControl = styled.div`
@@ -86,4 +127,8 @@ export const VolumeControl = styled.div`
   gap: 20px;
   margin-left: 200px;
   min-width: 180px;
+
+  ${device.xl} {
+    margin-left: 100px;
+  }
 `;
