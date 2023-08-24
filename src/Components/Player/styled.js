@@ -1,14 +1,18 @@
-import { MOBILE_PLAYER_HEIGHT, PLAYER_HEIGHT } from "Assets/Commons/constants";
+import {
+  MOBILE_HEADER_HEIGHT,
+  MOBILE_PLAYER_HEIGHT,
+  PLAYER_HEIGHT,
+} from "Assets/Commons/constants";
 import { SubText, Text } from "Components/UI/Typography";
 import { device } from "Styles/BreakPoints";
 import { styled } from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: ${(props) => (props.open ? "flex-start" : "center")};
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.secondaryBlack};
+  background-color: ${({ theme, open }) =>
+    open ? theme.colors.black : theme.colors.secondaryBlack};
   position: fixed;
   left: 0;
   bottom: 0;
@@ -16,7 +20,12 @@ export const Wrapper = styled.div`
   z-index: ${({ theme }) => theme.zIndex["30"]};
 
   ${device.lg} {
-    height: ${MOBILE_PLAYER_HEIGHT}px;
+    height: ${(props) =>
+      props.open
+        ? `calc(100vh - ${MOBILE_HEADER_HEIGHT}px)`
+        : `${MOBILE_PLAYER_HEIGHT}px`};
+    border-top-left-radius: ${(props) => (props.open ? 0 : "25px")};
+    border-top-right-radius: ${(props) => (props.open ? 0 : "25px")};
   }
 `;
 
@@ -48,7 +57,7 @@ export const TrackImage = styled.img`
   height: 65px;
   border-radius: 15px;
 
-  ${device.lg} {
+  ${device.md} {
     width: 45px;
     height: 45px;
   }
@@ -56,7 +65,6 @@ export const TrackImage = styled.img`
 
 export const TrackInfo = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
   gap: 10px;
 
@@ -72,10 +80,6 @@ export const ArtistName = styled(SubText)`
   line-clamp: 1;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-
-  ${device.lg} {
-    font-size: 16px;
-  }
 `;
 
 export const TrackTitle = styled(Text)`
@@ -84,16 +88,13 @@ export const TrackTitle = styled(Text)`
   line-clamp: 1;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-
-  ${device.lg} {
-    font-size: 18px;
-  }
 `;
 
 export const ControlButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 25px;
+  margin: ${(props) => (props.open ? "0 auto" : 0)};
 `;
 
 export const TrackTimeWrapper = styled.div`
@@ -104,13 +105,13 @@ export const TrackTimeWrapper = styled.div`
   width: 100%;
 
   ${device.xl} {
-    margin-left: 0;
+    margin: ${(props) => (props.open ? "40px 0" : 0)};
   }
 `;
 
 export const TrackTime = styled(SubText)`
   color: ${(props) =>
-    props.grey ? props.theme.colors.secondaryGrey : "inherit"};
+    props.grey ? props.theme.colors.secondaryGray : "inherit"};
   width: 80px;
   margin: 0 auto;
 
@@ -129,6 +130,26 @@ export const VolumeControl = styled.div`
   min-width: 180px;
 
   ${device.xl} {
-    margin-left: 100px;
+    margin: ${(props) => (props.open ? "40px auto 0" : "0 0 0 60px")};
+    width: ${(props) => (props.open ? "65%" : "auto")};
   }
+`;
+
+export const BackButton = styled.button`
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.lightGray};
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+  padding: 0 10px;
+  cursor: pointer;
+  margin: 27px 0 30px 0;
+`;
+
+export const PlayerMainImage = styled.img`
+  width: 311px;
+  height: 311px;
+  border-radius: 10px;
+  margin: 0 auto 37px;
 `;

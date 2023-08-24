@@ -12,15 +12,28 @@ export const Wrapper = styled.div`
   ${device.lg} {
     padding-bottom: calc(${MOBILE_PLAYER_HEIGHT} + 50px);
   }
+
+  ${device.md} {
+    gap: 25px;
+    padding-top: 28px;
+  }
 `;
 
 export const InputWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
+
+  ${device.lg} {
+    width: 100%;
+  }
 `;
 
 export const TableTitle = styled(SectionSubTitle)`
-  margin-top: 70px;
+  margin-bottom: 30px;
+
+  ${device.md} {
+    margin-bottom: 15px;
+  }
 `;
 export const NotFoundText = styled(SectionSubTitle)`
   color: ${({ theme }) => theme.colors.secondaryGray};

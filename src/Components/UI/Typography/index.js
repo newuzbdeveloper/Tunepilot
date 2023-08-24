@@ -21,10 +21,6 @@ export const SmallText = styled.span`
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   font-size: 18px;
   line-height: 22px;
-  ${device.md} {
-    font-size: 18px;
-    line-height: 22px;
-  }
 `;
 
 export const SectionTitle = styled.h2`

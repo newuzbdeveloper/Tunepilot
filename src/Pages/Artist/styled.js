@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 52px;
-  gap: 60px;
+  gap: 35px;
   padding-bottom: calc(${PLAYER_HEIGHT}px + 50px);
 
   ${device.lg} {
@@ -20,10 +20,36 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const ArtistImageAndName = styled.div`
+  display: flex;
+  gap: 50px;
+
+  ${device.md} {
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+export const ArtistImage = styled.img`
+  width: 350px;
+  height: 350px;
+  border-radius: 25px;
+  object-fit: cover;
+
+  ${device.md} {
+    height: 176px;
+    width: 100%;
+  }
+`;
+
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 12px;
+
+  ${device.md} {
+    gap: 5px;
+  }
 `;
 
 export const SongAndIconWrapper = styled.div`
@@ -34,6 +60,16 @@ export const SongAndIconWrapper = styled.div`
   color: ${({ theme }) => theme.colors.secondaryGray};
 `;
 
-export const GenreName = styled(MainTitle)`
+export const ArtistTitle = styled(MainTitle)`
   text-align: left;
+`;
+
+export const TopTracks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const ArtistImageLoaderWrapper = styled.div`
+  display: flex;
 `;

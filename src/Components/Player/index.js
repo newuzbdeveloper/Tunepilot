@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import { ContentWrapper } from "Components/Layout";
 import {
   ArtistName,
+  BackButton,
   ControlButtonsWrapper,
   MobileTrackRow,
+  PlayerMainImage,
   TrackImage,
   TrackInfo,
   TrackInfoWrapper,
@@ -26,15 +28,19 @@ import {
 import { actions } from "Components/Context/Actions";
 import { useWindowSize } from "Hooks/useWindowSize";
 import { breakPoints } from "Styles/BreakPoints";
+import { useLocation } from "react-router-dom";
 
 function Player() {
+  const location = useLocation();
   const { track, isPlaying } = useContext(PlayerContext);
+  const { width } = useWindowSize();
   const dispatch = useContext(PlayerDispatchContext);
   const audioRef = useRef();
   const [playerState, setPlayerState] = useState({
     currentTime: 0,
     duration: 0,
     volume: 0.7,
+    isOpen: false,
   });
 
   const handleSkipToNextSong = () => {
@@ -53,6 +59,11 @@ function Player() {
     dispatch({
       type: actions.TOGGLE_PLAY,
     });
+  };
+
+  const toggleOpen = () => {
+    if (width > breakPoints.lg && !playerState.isOpen) return;
+    setPlayerState((prev) => ({ ...prev, isOpen: !prev.isOpen }));
   };
 
   const onTimeUpdate = () => {
@@ -84,12 +95,34 @@ function Player() {
     } else audioRef.current.pause();
   }, [audioRef, track, isPlaying]);
 
+  useEffect(() => {
+    if (playerState.isOpen) toggleOpen();
+  }, [location]);
+
+  useEffect(() => {
+    if (playerState.isOpen) {
+      window.scroll(0, 0);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [playerState.isOpen]);
+
+  useEffect(() => {
+    if (width > breakPoints.lg && playerState.isOpen) {
+      toggleOpen();
+    }
+  }, [width]);
+
   if (!track) {
     return null;
   }
 
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={playerState.isOpen ? null : toggleOpen}
+      open={playerState.isOpen}
+    >
       <audio
         ref={audioRef}
         src={track.preview}
@@ -109,6 +142,9 @@ function Player() {
         toggleVolume={toggleVolume}
         onTrackTimeDrag={onTrackTimeDrag}
         onVolumeChange={onVolumeChange}
+        toggleOpen={toggleOpen}
+        width={width}
+        open={playerState.isOpen}
       />
     </Wrapper>
   );
@@ -124,8 +160,86 @@ function PlayerLayout({
   toggleVolume,
   onTrackTimeDrag,
   onVolumeChange,
+  toggleOpen,
+  width,
+  open,
 }) {
-  const { width } = useWindowSize();
+  if (open) {
+    return (
+      <ContentWrapper display="flex" direction="column" gap={14}>
+        <BackButton onClick={toggleOpen}>Back</BackButton>
+        <PlayerMainImage
+          src={track.album?.cover_big}
+          alt={`${track?.album?.title}'s cover photo`}
+        />
+        <MobileTrackRow>
+          <TrackInfoWrapper>
+            <TrackInfo>
+              <TrackTitle>{track?.title}</TrackTitle>
+              <ArtistName>{track?.artist?.name}</ArtistName>
+            </TrackInfo>
+          </TrackInfoWrapper>
+        </MobileTrackRow>
+        <TrackTimeWrapper open={1}>
+          <TrackTime>{formatMinAndSec(playerState?.currentTime)}</TrackTime>
+          <Slider
+            min={0}
+            max={playerState?.duration}
+            value={playerState?.currentTime}
+            step={0.2}
+            onChange={onTrackTimeDrag}
+            style={{ padding: "3px 0" }}
+            trackStyle={{ height: 8, backgroundColor: theme.colors.white }}
+            railStyle={{ height: 8, backgroundColor: theme.colors.darkGrey }}
+            handleStyle={{
+              border: "none",
+              backgroundColor: theme.colors.white,
+              marginTop: -3,
+            }}
+          />
+          <TrackTime last={1} grey={1}>
+            {formatMinAndSec(playerState?.duration)}
+          </TrackTime>
+        </TrackTimeWrapper>
+        <ControlButtonsWrapper open={1}>
+          <IconButton width={35} height={35} onClick={handleReturnToPrevSong}>
+            <SkipLeft />
+          </IconButton>
+          <IconButton
+            onClick={togglePlay}
+            withbackground
+            width={55}
+            height={55}
+          >
+            {isPlaying ? <Pause /> : <Play />}
+          </IconButton>
+          <IconButton width={35} height={35} onClick={handleSkipToNextSong}>
+            <SkipRight />
+          </IconButton>
+        </ControlButtonsWrapper>
+        <VolumeControl open={1}>
+          <IconButton width={24} height={24} onClick={toggleVolume}>
+            <Volume />
+          </IconButton>
+          <Slider
+            min={0}
+            max={1}
+            value={playerState?.volume}
+            step={0.01}
+            onChange={onVolumeChange}
+            style={{ padding: "3px 0" }}
+            trackStyle={{ height: 8, backgroundColor: theme.colors.white }}
+            railStyle={{ height: 8, backgroundColor: theme.colors.darkGrey }}
+            handleStyle={{
+              border: "none",
+              backgroundColor: theme.colors.white,
+              marginTop: -3,
+            }}
+          />
+        </VolumeControl>
+      </ContentWrapper>
+    );
+  }
   if (width < breakPoints.lg) {
     return (
       <ContentWrapper display="flex" items="center" direction="column" gap={14}>
@@ -142,7 +256,10 @@ function PlayerLayout({
           </TrackInfoWrapper>
           <ControlButtonsWrapper>
             <IconButton
-              onClick={togglePlay}
+              onClick={(event) => {
+                event.stopPropagation();
+                togglePlay();
+              }}
               withbackground
               width={55}
               height={55}
@@ -151,7 +268,7 @@ function PlayerLayout({
             </IconButton>
           </ControlButtonsWrapper>
         </MobileTrackRow>
-        <TrackTimeWrapper>
+        <TrackTimeWrapper onClick={(event) => event.stopPropagation()}>
           <TrackTime>{formatMinAndSec(playerState?.currentTime)}</TrackTime>
           <Slider
             min={0}
@@ -253,6 +370,7 @@ PlayerLayout.propTypes = {
     album: PropTypes.shape({
       title: PropTypes.string,
       cover: PropTypes.string,
+      cover_big: PropTypes.string,
     }),
   }),
   handleReturnToPrevSong: PropTypes.func,
@@ -267,5 +385,8 @@ PlayerLayout.propTypes = {
   toggleVolume: PropTypes.func,
   onTrackTimeDrag: PropTypes.func,
   onVolumeChange: PropTypes.func,
+  toggleOpen: PropTypes.func,
+  width: PropTypes.number,
+  open: PropTypes.bool,
 };
 export default Player;

@@ -14,7 +14,6 @@ export const StyledInput = styled.input`
   background-repeat: no-repeat;
   background-position: 17px 20px;
   width: 100%;
-  margin-bottom: 70px;
 
   &:focus {
     border: 2px solid ${({ theme }) => theme.colors.white};
