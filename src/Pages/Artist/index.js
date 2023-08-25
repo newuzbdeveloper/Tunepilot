@@ -1,7 +1,5 @@
 import { loadArtist } from "Components/HomePage/Services/api";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import {
   ArtistImage,
   ArtistImageAndName,
@@ -19,27 +17,12 @@ import Skeleton from "react-loading-skeleton";
 import { theme } from "Styles/Theme";
 import { breakPoints } from "Styles/BreakPoints";
 import { useWindowSize } from "Hooks/useWindowSize";
+import { useLoadData } from "Hooks/useLoadData";
 
 function Artist() {
-  const { artistId } = useParams();
-  const [artist, setArtist] = useState();
-  const [isLoading, setIsLoading] = useState(false);
   const { width } = useWindowSize();
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setIsLoading(true);
-        const artist = await loadArtist(artistId);
-        setArtist(artist);
-      } catch (err) {
-        toast.error(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadData();
-  }, []);
+  const { artistId } = useParams();
+  const [artist, isLoading] = useLoadData(() => loadArtist(artistId));
 
   return (
     <Wrapper>

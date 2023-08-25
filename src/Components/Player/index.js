@@ -108,11 +108,9 @@ function Player() {
     }
   }, [playerState.isOpen]);
 
-  useEffect(() => {
-    if (width > breakPoints.lg && playerState.isOpen) {
-      toggleOpen();
-    }
-  }, [width]);
+  if (width > breakPoints.lg && playerState.isOpen) {
+    toggleOpen();
+  }
 
   if (!track) {
     return null;

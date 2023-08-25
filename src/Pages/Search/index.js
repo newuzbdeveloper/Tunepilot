@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { InputWrapper, NotFoundText, TableTitle, Wrapper } from "./styled";
 import { search } from "Components/HomePage/Services/api";
 import { toast } from "react-toastify";
@@ -8,22 +8,7 @@ import SearchIcon from "Assets/Icons/search-input.svg";
 
 function Search() {
   const [searchResult, setSearchResult] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [tracks, setTracks] = useState([]);
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setIsLoading(true);
-        const data = await search(searchResult);
-        setTracks(data);
-      } catch (err) {
-        toast.error(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    if (searchResult) loadData();
-  }, [searchResult]);
+  const [tracks, isLoading] = useDebounceLoadData(searchResult);
   return (
     <Wrapper>
       <InputWrapper>
@@ -47,6 +32,33 @@ function Search() {
       )}
     </Wrapper>
   );
+}
+
+function useDebounceLoadData(searchResult) {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const fetchTimeOut = useRef();
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        const searchData = await search(searchResult);
+        setData(searchData);
+      } catch (err) {
+        toast.error(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    if (searchResult) {
+      clearTimeout(fetchTimeOut.current);
+      fetchTimeOut.current = setTimeout(loadData, 500);
+    } else {
+      setData(null);
+    }
+  }, [searchResult]);
+  return [data, isLoading];
 }
 
 export default Search;
