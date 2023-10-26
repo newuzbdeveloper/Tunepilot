@@ -1,4 +1,5 @@
 [[redirects]]
   from = "*"
-  to = "https://api.deezer.com/:splat"
+  to = "https://api.deezer.com"
   status = 200
+  force = true
