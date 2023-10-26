@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "*"
+  to = "https://api.deezer.com/:splat"
+  status = 200
