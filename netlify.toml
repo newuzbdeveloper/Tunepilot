@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/*"
-  to = "https://api.deezer.com"
+  to = "https://api.deezer.com/album/302127"
   status = 200
   force = true
-  headers = {X-From = "Netlify"}
+  
